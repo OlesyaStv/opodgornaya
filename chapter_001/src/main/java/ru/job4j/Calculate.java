@@ -7,7 +7,7 @@ package ru.job4j;
 * @version 1
 */
 
-public class Calculate{
+public class Calculate {
 
 	
 	/***
@@ -15,7 +15,7 @@ public class Calculate{
 	* @param args - args.
 	* @return cтрока "Hello, World!"
 	*/
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		System.out.println("Hello, World!");
 	}
 	
