@@ -11,7 +11,7 @@ public class SquareTest {
     public void whenBoundFour() {
         Square sq = new Square();
         int[] rst = sq.calculate(4);
-        int[] expected = new int[] {0, 1, 4, 9};
+        int[] expected = new int[] {1, 4, 9, 16};
         assertThat(rst, is(expected));
 
     }
