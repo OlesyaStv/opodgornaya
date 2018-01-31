@@ -12,7 +12,7 @@ public class MatrixTest {
     public void testArray() {
         Matrix matrix = new Matrix();
         int[][] arrayrslt = matrix.multiple(3);
-        int[][] massive = {{0, 0, 0}, {0, 1, 2}, {0, 2, 4}};
+        int[][] massive = {{1, 2, 3}, {2, 4, 6}, {3, 6, 9}};
         assertThat(arrayrslt, is(massive));
     }
 }
