@@ -17,7 +17,7 @@ public class StringContain {
                     }
                 }
                 if (result) {
-                    return result;
+                    break;
                 }
 
             }
