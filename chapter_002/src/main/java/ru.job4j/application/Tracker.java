@@ -1,5 +1,6 @@
 package ru.job4j.application;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Tracker {
@@ -40,6 +41,7 @@ public class Tracker {
     }
 
     public void replace(String id, Item item) {
+        item.setId(this.generateId());
         for (int index = 0; index != this.position; index++) {
             if (this.items[index] == findById(id)) {
                 this.items[index] = item;
@@ -49,13 +51,25 @@ public class Tracker {
 
     public void delete(String id) {
         Item finder = findById(id);
+        int changes = 0;
         for (int index = 0; index != this.position; index++) {
             if (items[index] == finder) {
-                System.arraycopy(items, index + 1, items, index, items.length - 1 - index);
+                changes++;
+                if (index + 1 != this.position) {
+                    System.arraycopy(items, index + 1, items, index, items.length - 1 - index);
+                } else {
+                   Item[] itemsSocr = Arrays.copyOf(items, index);
+                   items = new Item[100];
+                   System.arraycopy(itemsSocr, 0, items, 0, itemsSocr.length);
+                }
             }
         }
 
+        position = position - changes;
+
     }
+
+
 
     public Item[] findByName(String key) {
         Tracker tracker = new Tracker();
@@ -69,11 +83,6 @@ public class Tracker {
 
 }
 
-
-//
-//    public void ipdate(Item item){
-//
-//    }
 
 
 
