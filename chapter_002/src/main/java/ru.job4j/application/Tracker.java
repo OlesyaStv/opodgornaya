@@ -52,23 +52,18 @@ public class Tracker {
 
     public void delete(String id) {
         Item finder = findById(id);
- //       int changes = 0;
+        int changes = 0;
         for (int index = 0; index != this.position; index++) {
             if (items[index] == finder) {
-                items[index] = null;
-//                changes++;
-//                if (index + 1 != this.position) {
-//                    System.arraycopy(items, index + 1, items, index, items.length - 1 - index);
-//                } else {
-//                   Item[] itemsSocr = Arrays.copyOf(items, index);
-//                   items = new Item[100];
-//                   System.arraycopy(itemsSocr, 0, items, 0, itemsSocr.length);
-//                }
+                changes++;
+                if (index + 1 != this.position) {
+                    System.arraycopy(items, index + 1, items, index, items.length - 1 - index);
+                } else {
+                    items[index] = null;
+                }
             }
         }
-
-  //     position = position - changes;
-
+       position = position - changes;
     }
 
 
