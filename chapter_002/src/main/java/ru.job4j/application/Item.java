@@ -8,6 +8,8 @@ public class Item {
     private long created;
     private String comments;
 
+    public Item() {
+    }
 
     public Item(String name, String desc, long created) {
         this.name = name;

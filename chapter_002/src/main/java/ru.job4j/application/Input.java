@@ -4,5 +4,4 @@ public interface Input {
 
     String ask(String question);
 
-   // String print (String data);
 }
