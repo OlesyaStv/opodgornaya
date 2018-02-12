@@ -69,8 +69,6 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню.")
-                                .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())
                                 .append("1. Show all items")
@@ -94,8 +92,6 @@ public class StartUITest {
                                 .append("Заявка с getId : " + itemT.getId() + " name: " + itemT.getName() +  " desc: " +  itemT.getDesc())
                                 .append(System.lineSeparator())
                                 .append("------------ Завершился показ всех заявок--------------")
-                                .append(System.lineSeparator())
-                                .append("Меню.")
                                 .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())
@@ -128,8 +124,6 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню.")
-                                .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())
                                 .append("1. Show all items")
@@ -149,8 +143,6 @@ public class StartUITest {
                                 .append("Найдена заявка с getId : " + itemS.getId() + "name: " + itemS.getName())
                                 .append(System.lineSeparator())
                                 .append("------------ Завершился поиск по name--------------")
-                                .append(System.lineSeparator())
-                                .append("Меню.")
                                 .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())
@@ -183,8 +175,6 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню.")
-                                .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())
                                 .append("1. Show all items")
@@ -202,8 +192,6 @@ public class StartUITest {
                                 .append("------------ Поиск заявки по id--------------")
                                 .append(System.lineSeparator())
                                 .append("------------ Найдена заявка с getId : " + itemS.getId() + "name: " + itemS.getName() + "--------------")
-                                .append(System.lineSeparator())
-                                .append("Меню.")
                                 .append(System.lineSeparator())
                                 .append("0. Add new Item")
                                 .append(System.lineSeparator())

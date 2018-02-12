@@ -8,7 +8,7 @@ public class StartUI {
     private static final String DELETE = "3";
     private static final String FINDBYID = "4";
     private static final String FINDBYNAME = "5";
-    private static final String EXIT = "6";
+    private static final int EXIT = 6;
 
     private final Tracker tracker;
     private final Input input;
@@ -19,26 +19,37 @@ public class StartUI {
     }
 
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (SHOW.equals(answer)) {
-                this.showAll();
-            } else if (EDIT.equals(answer)) {
-                this.edit();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (FINDBYID.equals(answer)) {
-                this.findById();
-            } else if (FINDBYNAME.equals(answer)) {
-                this.findByName();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-            }
-        }
+//        boolean exit = false;
+//        while (!exit) {
+//            this.showMenu();
+//            String answer = this.input.ask("Введите пункт меню : ");
+//            if (ADD.equals(answer)) {
+//                this.createItem();
+//            } else if (SHOW.equals(answer)) {
+//                this.showAll();
+//            } else if (EDIT.equals(answer)) {
+//                this.edit();
+//            } else if (DELETE.equals(answer)) {
+//                this.deleteItem();
+//            } else if (FINDBYID.equals(answer)) {
+//                this.findById();
+//            } else if (FINDBYNAME.equals(answer)) {
+//                this.findByName();
+//            } else if (EXIT.equals(answer)) {
+//                exit = true;
+//            }
+//}
+        Tracker tracker = new Tracker();
+        MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
+        menuTracker.fillActions();
+        int key;
+        do {
+            menuTracker.show();
+            key = Integer.valueOf(input.ask("Select: "));
+            menuTracker.select(key);
+        } while (EXIT != key);
+
+
     }
 
     private void createItem() {
@@ -76,12 +87,12 @@ public class StartUI {
     }
 
     private void showAll() {
-        System.out.println("------------ Показать все заявки--------------");
+       System.out.println("------------ Показать все заявки--------------");
         Item[] items = this.tracker.findAll();
         for (Item item : items) {
             System.out.println("Заявка с getId : " + item.getId() + " name: " + item.getName() +  " desc: " +  item.getDesc());
         }
-        System.out.println("------------ Завершился показ всех заявок--------------");
+       System.out.println("------------ Завершился показ всех заявок--------------");
 
     }
 
@@ -109,7 +120,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-       new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 
 }
