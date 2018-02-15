@@ -10,12 +10,12 @@ class EditItem implements UserAction {
         System.out.println("------------Редактирование заявки--------------");
         String idR = input.ask("Введите id заявки для редактирования:");
         Item item = tracker.findById(idR);
-        System.out.println("Найдена заявка с getId : " + item.getId() + "name: " + item.getName() + " desc: " +  item.getDesc());
+        System.out.println(String.format("Найдена заявка с getId : %sname: %s desc: ",  item.getId(), item.getName(), item.getDesc()));
         String name = input.ask("Введите новое имя заявки :");
         String desc = input.ask("Введите новое описание заявки :");
         Item itemNew = new Item(name, desc);
         tracker.replace(idR, itemNew);
-        System.out.println("Заявка отредактирована - getId : " + item.getId() + "name: " + item.getName() + " desc: " +  item.getDesc());
+        System.out.println(String.format("Заявка отредактирована - getId : %sname: %s desc: %s", item.getId(), item.getName(), item.getDesc()));
     }
 
     public String info() {
@@ -34,8 +34,7 @@ class FindItemById implements UserAction {
         System.out.println("------------ Поиск заявки по id--------------");
         String id = input.ask("Введите id заявки :");
         Item item = tracker.findById(id);
-        System.out.println("------------ Найдена заявка с getId : " + id + "name: " + item.getName() + "--------------");
-
+        System.out.println(String.format("------------ Найдена заявка с getId : %sname: %s--------------", id, item.getName()));
     }
 
     public String info() {
@@ -99,7 +98,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Показать все заявки--------------");
             for (Item item : tracker.findAll()) {
-                System.out.println("Заявка с getId : " + item.getId() + " name: " + item.getName() +  " desc: " +  item.getDesc());
+                System.out.println(String.format("Заявка с getId : %s name: %s desc: %s", item.getId(), item.getName(), item.getDesc()));
             }
             System.out.println("------------ Завершился показ всех заявок--------------");
         }
@@ -119,7 +118,7 @@ public class MenuTracker {
             System.out.println("------------ Удаление заявки --------------");
             String id = input.ask("Введите id заявки :");
             tracker.delete(id);
-            System.out.println("------------ Заявка с getId : " + id + " удалена -----------");
+            System.out.println(String.format("------------ Заявка с getId : %s удалена -----------", id));
         }
 
         public String info() {
@@ -139,7 +138,7 @@ public class MenuTracker {
             String desc = input.ask("Введите описание заявки :");
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
+            String.format("------------ Новая заявка с getId : %s-----------", item.getId());
         }
 
         public String info() {
