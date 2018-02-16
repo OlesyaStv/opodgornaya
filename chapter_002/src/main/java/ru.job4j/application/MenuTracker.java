@@ -77,6 +77,14 @@ public class MenuTracker {
         this.actions[6] = new Exit();
     }
 
+    public int[] getRangeOfMenu() {
+        int[] range = new int[actions.length];
+        for (int index = 0; index < range.length; index++) {
+           range[index] = index;
+        }
+        return range;
+    }
+
     public void select(int key) {
         this.actions[key].execute(this.input, this.tracker);
     }
