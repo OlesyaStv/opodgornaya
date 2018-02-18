@@ -45,7 +45,7 @@ public class StartUI {
         int key;
         do {
             menuTracker.show();
-            ValidateInput vInput = new ValidateInput();
+            ValidateInput vInput = new ValidateInput(this.input);
             key =  vInput.ask("Select: ", menuTracker.getRangeOfMenu());
             menuTracker.select(key);
         } while (EXIT != key);
@@ -121,7 +121,13 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+ //      new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(
+                new ValidateInput(
+                        new ConsoleInput()
+                ),
+                new Tracker()
+        ).init();
     }
 
 }
