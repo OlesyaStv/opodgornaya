@@ -2,6 +2,8 @@ package ru.job4j.calculator;
 
 import org.junit.Test;
 
+import static java.lang.Double.NaN;
+import static java.lang.Double.POSITIVE_INFINITY;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -27,10 +29,9 @@ public class CalculatorTest {
     @Test
     public void whenDivSixDivadeTwoThenThree() {
         Calculator calc = new Calculator();
-        calc.div(6D, 2D);
+        calc.div(6D, 0D);
         double result = calc.getResult();
-        double expected = 3D;
-        assertThat(result, is(expected));
+        assertThat(result, is(POSITIVE_INFINITY));
     }
 
     @Test
