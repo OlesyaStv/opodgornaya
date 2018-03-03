@@ -47,4 +47,24 @@ public class ConvertListTest {
         int[][]  massiveShouldBe = {{4}, {7}, {0}, {0}};
         assertThat(massive, is(massiveShouldBe));
     }
+
+    @Test
+    public void whenConvertThird() {
+        ConvertList cl = new ConvertList();
+        int[][] array = new int[][]{{4}};
+        List<Integer> list =  cl.toList(array);
+        int[][] massive = cl.toArray(list, 4);
+        int[][]  massiveShouldBe = {{4}, {0}, {0}, {0}};
+        assertThat(massive, is(massiveShouldBe));
+    }
+
+    @Test
+    public void whenConvertFourth() {
+        ConvertList cl = new ConvertList();
+        int[][] array = new int[][]{{4}, {1}, {2}, {3}, {4}, {1}, {2}, {3}};
+        List<Integer> list =  cl.toList(array);
+        int[][] massive = cl.toArray(list, 3);
+        int[][]  massiveShouldBe = {{4, 1, 2}, {3, 4, 1}, {2, 3, 0}};
+        assertThat(massive, is(massiveShouldBe));
+    }
 }
