@@ -35,7 +35,7 @@ public class Person {
         StringJoiner str = new StringJoiner(" ");
         str.add(name);
         str.add(surname);
-        str.add(phone);
+       // str.add(phone);
         str.add(address);
         return str.toString();
     }

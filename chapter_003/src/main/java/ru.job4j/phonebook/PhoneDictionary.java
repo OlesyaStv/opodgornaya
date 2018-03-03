@@ -23,7 +23,8 @@ public class PhoneDictionary {
         while (iterator.hasNext()) {
             Person human = iterator.next();
             String fullString = human.getFullString();
-            if (fullString.contains(key)) {
+            String telephone = human.getPhone();
+            if (fullString.contains(key) || telephone.contains(key)) {
                 result.add(human);
             }
         }
