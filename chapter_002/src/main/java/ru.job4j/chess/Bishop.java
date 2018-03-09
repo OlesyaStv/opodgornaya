@@ -6,10 +6,10 @@ public class Bishop extends Figure {
     public Bishop(Cell position) {
         super(position);
     };
-
-
+    //first
 //    public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
 //        boolean canGo = false;
+//        boolean xFirst = false;
 //        int xDest = dest.x;
 //        int yDest = dest.y;
 //        int xCoord = source.x;
@@ -19,27 +19,30 @@ public class Bishop extends Figure {
 //        int kol = kolPoX + kolPoY;
 //        if (kol == 3 && (((kolPoX == 1) && (kolPoY == 2)) || ((kolPoX == 2) && (kolPoY == 1)))) {
 //            canGo = true;
+//            if (kolPoX == 2) {
+//                xFirst = true;
+//            }
 //        }
 //        if (canGo) {
 //            Cell[] wayCell = new Cell[3];
 //            int index = 0;
-//            int deltaX = Integer.compare(xDest, xCoord);
-//            int deltaY = Integer.compare(yDest, yCoord);
-//            while ((deltaX + deltaY) != 0) {
-//                if (Math.abs(xDest - xCoord) >= Math.abs(yDest - yCoord)) {
-//                    while (deltaX != 0) {
-//                        xCoord += deltaX;
-//                        wayCell[index] = new Cell(xCoord, yCoord);
-//                        index++;
-//                        deltaX = Integer.compare(xDest, xCoord);
-//                    }
+//            while (xCoord != xDest || yCoord != yDest) {
+//                int deltaX = Integer.compare(xDest, xCoord);
+//                int deltaY = Integer.compare(yDest, yCoord);
+//                if (xFirst) {
+//                    deltaY = 0;
 //                } else {
-//                    while (deltaY != 0) {
-//                        yCoord += deltaY;
-//                        wayCell[index] = new Cell(xCoord, yCoord);
-//                        index++;
-//                        deltaY = Integer.compare(yDest, yCoord);
-//                    }
+//                    deltaX = 0;
+//                }
+//                xCoord += deltaX;
+//                yCoord += deltaY;
+//                wayCell[index] = new Cell(xCoord, yCoord);
+//                index++;
+//                if (xCoord == xDest) {
+//                    xFirst = false;
+//                }
+//                if (yCoord == yDest) {
+//                    xFirst = true;
 //                }
 //            }
 //            return  wayCell;
@@ -48,52 +51,79 @@ public class Bishop extends Figure {
 //        }
 //    }
 
+
+    //second
+//    public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
+//        Cell[] wayCell = new Cell[3];
+//        boolean xFirst = false;
+//        int kolPoY = Math.abs(dest.y - source.y);
+//        int kolPoX = Math.abs(dest.x - source.x);
+//        if (kolPoX > kolPoY){
+//            xFirst = true;
+//        }
+//        if (kolPoX * kolPoY == 2) {
+//            int index = 0;
+//            while (source.x != dest.x || source.y != dest.y) {
+//                int deltaX = Integer.compare(dest.x, source.x);
+//                int deltaY = Integer.compare(dest.y, source.y);
+//                if (xFirst) {
+//                    deltaY = 0;
+//                } else {
+//                    deltaX = 0;
+//                }
+//                wayCell[index] = new Cell(source.x += deltaX, source.y += deltaY);
+//                index++;
+//                if (source.x  == dest.x) {
+//                    xFirst = false;
+//                }
+//                if (source.y == dest.y) {
+//                    xFirst = true;
+//                }
+//            }
+//        } else {
+//            throw new ImposibleMoveException("Impossible move!");
+//        }
+//        return  wayCell;
+//    }
+
+    //third
     public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
-        boolean canGo = false;
+        Cell[] wayCell = new Cell[3];
+        int kolPoY = Math.abs(dest.y - source.y);
+        int kolPoX = Math.abs(dest.x - source.x);
         boolean xFirst = false;
-        int xDest = dest.x;
-        int yDest = dest.y;
-        int xCoord = source.x;
-        int yCoord = source.y;
-        int kolPoY = Math.abs(yDest - yCoord);
-        int kolPoX = Math.abs(xDest - xCoord);
-        int kol = kolPoX + kolPoY;
-        if (kol == 3 && (((kolPoX == 1) && (kolPoY == 2)) || ((kolPoX == 2) && (kolPoY == 1)))) {
-            canGo = true;
-            if (kolPoX == 2) {
-                xFirst = true;
-            }
+        if (kolPoX > kolPoY) {
+            xFirst = true;
         }
-        if (canGo) {
-            Cell[] wayCell = new Cell[3];
+        if (kolPoX * kolPoY == 2) {
             int index = 0;
-            while (xCoord != xDest || yCoord != yDest) {
-                int deltaX = Integer.compare(xDest, xCoord);
-                int deltaY = Integer.compare(yDest, yCoord);
+            while (index != kolPoX + kolPoY){
                 if (xFirst) {
-                    deltaY = 0;
-                } else {
-                    deltaX = 0;
-                }
-                xCoord += deltaX;
-                yCoord += deltaY;
-                wayCell[index] = new Cell(xCoord, yCoord);
-                index++;
-                if (xCoord == xDest) {
+                    int deltaX = Integer.compare(dest.x, source.x);
+                    while (deltaX != 0) {
+                        wayCell[index] = new Cell(source.x += deltaX, source.y);
+                        deltaX = Integer.compare(dest.x, source.x);
+                        index++;
+                    }
                     xFirst = false;
-                }
-                if (yCoord == yDest) {
+                }else {
+                    int deltaY = Integer.compare(dest.y, source.y);
+                    while (deltaY != 0) {
+                        wayCell[index] = new Cell(source.x, source.y += deltaY);
+                        deltaY = Integer.compare(dest.y, source.y);
+                        index++;
+                    }
                     xFirst = true;
                 }
             }
-            return  wayCell;
-        } else {
+        }
+        else {
             throw new ImposibleMoveException("Impossible move!");
         }
+        return wayCell;
     }
 
     public Figure copy(Cell dest) {
-
         return new Bishop(dest);
     }
 
