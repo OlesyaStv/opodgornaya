@@ -8,14 +8,11 @@ public class UserConvert {
 
     public HashMap<Integer, User> process(List<User> list) {
         HashMap<Integer, User> hashMap = new HashMap<>();
-        ListIterator<User> listIterator = list.listIterator();
         Integer key = 0;
-        while (listIterator.hasNext()) {
-            hashMap.put(key, listIterator.next());
+        for (User user : list) {
+            hashMap.put(key, user);
             key++;
         }
-
         return  hashMap;
-
     }
 }
