@@ -14,8 +14,8 @@ public class SortUserTest {
         List<User> users = new ArrayList<>();
         User user1 = new User("Nikolay", 28);
         User user2 = new User("Stepan", 10);
-        User user3 = new User("Stepan", 28);
-        User user4 = new User("Fedor", 40);
+        User user3 = new User("Ilya", 28);
+        User user4 =  new User("Fedor", 40);
         users.add(user1);
         users.add(user2);
         users.add(user3);
