@@ -26,4 +26,5 @@ public class TwoSortedArraysTest {
         int[] arrayShouldBe = {1, 1, 2, 3, 7, 8};
         assertThat(arrayRslt, is(arrayShouldBe));
     }
+
 }
