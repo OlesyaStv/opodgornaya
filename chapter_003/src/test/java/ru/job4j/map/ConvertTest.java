@@ -14,14 +14,14 @@ public class ConvertTest {
     public void whenProcess() {
         UserConvert us = new UserConvert();
         List<User> listOfUsers = new ArrayList<>();
-        User checkUser = new User("id3", "Sidorov", "Permian");
-        listOfUsers.add(new User("id1", "Ivanov", "St. Petersburg"));
-        listOfUsers.add(new User("id2", "Petrov", "Moscow"));
+        User checkUser = new User(3, "Sidorov", "Permian");
+        listOfUsers.add(new User(1 , "Ivanov", "St. Petersburg"));
+        listOfUsers.add(new User(2, "Petrov", "Moscow"));
         listOfUsers.add(checkUser);
-        listOfUsers.add(new User("id4", "Fedorov", "Tula"));
-        listOfUsers.add(new User("id5", "Gruzov", "Stavropol"));
+        listOfUsers.add(new User(4, "Fedorov", "Tula"));
+        listOfUsers.add(new User(5, "Gruzov", "Stavropol"));
         HashMap<Integer, User> map = us.process(listOfUsers);
-        assertThat(map.get(2), is(checkUser));
+        assertThat(map.get(3), is(checkUser));
     }
 
 }

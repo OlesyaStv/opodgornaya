@@ -2,11 +2,11 @@ package ru.job4j.map;
 
 public class User {
 
-    private String id;
+    private Integer id;
     private String name;
     private String city;
 
-    public User(String id, String name, String city) {
+    public User(Integer id, String name, String city) {
 
         this.id = id;
         this.city = city;
@@ -17,7 +17,7 @@ public class User {
         return city;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class User {
         this.name = name;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
