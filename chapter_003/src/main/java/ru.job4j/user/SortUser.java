@@ -5,9 +5,10 @@ import java.util.*;
 public class SortUser {
 
     public Set<User> sort(List<User> users) {
-        Set<User> list = new TreeSet<>();
-        list.addAll(users);
-        return list;
+//        Set<User> list = new TreeSet<>();
+//////        list.addAll(users);
+//////        return list;
+        return new TreeSet<>(users);
     }
 
     public List<User> sortNameLength(List<User> users) {
