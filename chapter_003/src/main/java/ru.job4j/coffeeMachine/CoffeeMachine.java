@@ -2,11 +2,11 @@ package ru.job4j.coffeeMachine;
 
 import java.util.ArrayList;
 
-public class CoffeeMachine {
+public class CoffeeMachine{
 
     private static final int[] bills = {1, 2, 5, 10};
 
-    public Integer[] changes(int value, int price) {
+    public int[] changes(int value, int price) {
         ArrayList <Integer> list = new ArrayList<>();
         int dif = value - price;
         int ind = bills.length - 1;
@@ -19,7 +19,8 @@ public class CoffeeMachine {
             }
             ind--;
         }
-        Integer[] change =  list.toArray(new Integer[list.size()]);
+        //Integer[] change = list.toArray(new Integer[list.size()]);
+        int[] change = list.stream().mapToInt(i -> i).toArray();
         return change;
     }
 
