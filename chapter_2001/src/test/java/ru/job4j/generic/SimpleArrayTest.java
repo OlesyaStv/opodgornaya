@@ -51,8 +51,8 @@ public class SimpleArrayTest {
         array.add("ggg");
         array.add("test");
         array.add("experiment");
-        array.delete(0);
-        assertThat(array.get(0), is("test"));
+        array.delete(1);
+        assertThat(array.get(1), is("experiment"));
     }
 
     @Test

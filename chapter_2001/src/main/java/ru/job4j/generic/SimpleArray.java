@@ -29,14 +29,19 @@ public class SimpleArray <T> implements Iterator{
         this.objects[index] = model;
     }
 
-    public void delete(int index){
-        List result = new LinkedList();
-
-        for(int in = 0; in < objects.length; in++) {
-            if(in != index)
-                result.add(objects[in]);
+    public void delete(int finder){
+        int changes = 0;
+        for (int cell = 0; cell != this.index; cell++) {
+            if (cell == finder) {
+                changes++;
+                if (cell + 1 != this.index) {
+                    System.arraycopy(objects, cell + 1, objects, cell, objects.length - 1 - cell);
+                } else {
+                    objects[cell] = null;
+                }
+            }
         }
-        this.objects = result.toArray();
+        index = index - changes;
     }
 
     @Override
