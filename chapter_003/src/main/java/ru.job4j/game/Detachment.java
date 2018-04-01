@@ -1,43 +1,22 @@
 package ru.job4j.game;
 
 
+import ru.job4j.game.Character;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 
-public class Detachment {
+public abstract class Detachment {
 
-    private List<Character> characters = new LinkedList<>();
+    protected List<Character> characters = new LinkedList<>();
 
-    private String Race;
-    private int KolWixard = 1;
-    private int KolArcher = 3;
-    private int KolFighter = 4;
+    protected static String Race;
+    protected int KolWixard = 1;
+    protected int KolArcher = 3;
+    protected int KolFighter = 4;
 
-
-    public Detachment(String Race){
-        if (Race.equals("Elf")) {
-            for (int j = 0; j < KolWixard; j++) {
-                characters.add(new ElfWizard());
-            }
-            for (int i = 0; i < KolArcher; i++) {
-                characters.add(new ElfArcher());
-            }
-            for (int i = 0; i < KolFighter; i++) {
-                characters.add(new ElfFighter());
-            }
-        } else if (Race.equals("Human")) {
-            for (int j = 0; j < KolWixard; j++) {
-                characters.add(new HumanWizard());
-            }
-            for (int i = 0; i < KolArcher; i++) {
-                characters.add(new HumanArcher());
-            }
-            for (int i = 0; i < KolFighter; i++) {
-                characters.add(new HumanFighter());
-            }
-        }
-    }
 
     public int countAlivePersons(){
        int count = 0;
@@ -55,5 +34,64 @@ public class Detachment {
             allDied = true;
         };
         return allDied;
+    }
+
+    public static String getRace() {
+        return Race;
+    }
+
+    public List<Character> getVipPersons(){
+        List<Character> vipCharacters = new LinkedList<>();
+        ListIterator<Character> listite = characters.listIterator();
+        while (listite.hasNext()){
+            Character nextPerson = listite.next();
+            if (nextPerson.getAlive() && nextPerson.getVipStatus()){
+                vipCharacters.add(nextPerson);
+            }
+        }
+        return vipCharacters;
+    }
+
+    public List<Character> getAlivePersons(){
+        List<Character> aliveCharacters = new LinkedList<>();
+        ListIterator<Character> listite = characters.listIterator();
+        while (listite.hasNext()){
+            Character nextPerson = listite.next();
+            if (nextPerson.getAlive() ){
+                aliveCharacters.add(nextPerson);
+            }
+        }
+        return aliveCharacters;
+    }
+
+    public Character getAnotherAlivePerson(Character character){
+        Character anotherAlivePerson = null;
+        List<Character> aliveCharacters = getAlivePersons();
+        ListIterator<Character> listite = characters.listIterator();
+        while (listite.hasNext()){
+            Character nextPerson = listite.next();
+            if (!nextPerson.equals(character)){
+                anotherAlivePerson = nextPerson;
+            }
+        }
+        return anotherAlivePerson;
+    }
+
+    public Character getRandomPerson(){
+        return getAlivePersons().get((int) (Math.random() * (getAlivePersons().size() - 1)));
+    }
+
+    public Character getAttackPerson(){
+        List<Character> listForChoice = new LinkedList<>();
+        List<Character> vipCharacters = getVipPersons();
+        if (vipCharacters.size() > 0){
+            listForChoice = vipCharacters;
+        } else {
+            List<Character> aliveCharacters = getAlivePersons();
+            if (aliveCharacters.size() > 0){
+                listForChoice =  aliveCharacters;
+            }
+        }
+       return listForChoice.get((int) (Math.random() * (listForChoice.size() - 1)));
     }
 }

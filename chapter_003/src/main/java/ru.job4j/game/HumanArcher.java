@@ -1,16 +1,28 @@
 package ru.job4j.game;
 
+import ru.job4j.game.Archer;
+import ru.job4j.game.Character;
+import ru.job4j.game.Human;
+
 import java.util.StringJoiner;
 
 public class HumanArcher extends Character implements Human, Archer {
 
+    public void way(Character character, Character theSameRaceCharacter) {
+        if(coin() == 0){
+            attack(character);
+        } else {
+            archery(character);
+        }
+    }
+
 
     public void attack(Character character){
-        character.reduceLivingLevel(3, this);
+        this.reduceLivingLevel(3, character);
     }
 
     public void archery(Character character){
-        character.reduceLivingLevel(5, this);
+        character.reduceLivingLevel(5, character);
     }
 
     @Override
