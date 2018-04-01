@@ -15,7 +15,7 @@ public class IteratorConverter implements Iterator {
 
     @Override
     public boolean hasNext() {
-       return (values.length != row && (values.length > row || values[row].length > cell)) ? true : false;
+      return (values.length != row && (values.length > row || values[row].length > cell));
     }
 
     @Override
