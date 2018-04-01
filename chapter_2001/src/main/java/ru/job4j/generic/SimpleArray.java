@@ -1,5 +1,6 @@
 package ru.job4j.generic;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,18 +31,9 @@ public class SimpleArray <T> implements Iterator{
     }
 
     public void delete(int finder){
-        int changes = 0;
-        for (int cell = 0; cell != this.index; cell++) {
-            if (cell == finder) {
-                changes++;
-                if (cell + 1 != this.index) {
-                    System.arraycopy(objects, cell + 1, objects, cell, objects.length - 1 - cell);
-                } else {
-                    objects[cell] = null;
-                }
-            }
-        }
-        index = index - changes;
+        int cell = Arrays.asList(objects).indexOf(objects[finder]);
+        System.arraycopy(objects, cell + 1, objects, cell, objects.length - 1 - cell);
+        index = index - 1;
     }
 
     @Override
