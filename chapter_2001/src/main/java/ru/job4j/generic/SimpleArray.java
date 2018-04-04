@@ -14,6 +14,10 @@ public class SimpleArray <T> implements Iterator{
         this.objects = objects;
     }
 
+    public void  resetIndexForTest(){
+        index = 0;
+    }
+
     public SimpleArray(int size) {
         this.objects = new Object[size];
     }
@@ -43,7 +47,7 @@ public class SimpleArray <T> implements Iterator{
 
     @Override
     public Object next() {
-        return objects[index];
+        return objects[index++];
     }
 }
 
