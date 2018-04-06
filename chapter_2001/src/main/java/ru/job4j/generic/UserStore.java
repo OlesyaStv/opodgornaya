@@ -1,6 +1,5 @@
 package ru.job4j.generic;
 
-
-public class UserStore <User> extends AbstractStore{
+public class UserStore extends AbstractStore<User> {
 
 }

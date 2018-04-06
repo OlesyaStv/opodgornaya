@@ -1,8 +1,8 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore<T>  implements Store{
+public abstract class AbstractStore<T>  implements Store {
 
-    public SimpleArray<T>  list = new SimpleArray (10);
+    public SimpleArray<T>  list = new SimpleArray(10);
 
     @Override
     public void add(Base model) {
@@ -19,7 +19,7 @@ public abstract class AbstractStore<T>  implements Store{
         boolean replaceDone = false;
         while (list.hasNext()) {
             Base element = (Base) list.next();
-            if (element.getId().equals(id)){
+            if (element.getId().equals(id)) {
                 list.set(list.index - 1, (T) model);
                 replaceDone = true;
                 break;
@@ -33,8 +33,8 @@ public abstract class AbstractStore<T>  implements Store{
         boolean deleteDone = false;
         while (list.hasNext()) {
             Base element = (Base) list.next();
-            if (element.getId().equals(id)){
-                list.delete(list.index - 1 );
+            if (element.getId().equals(id)) {
+                list.delete(list.index - 1);
                 deleteDone = true;
                 break;
             }

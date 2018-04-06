@@ -9,7 +9,7 @@ public class RoleStoreTest {
 
     @Test
     public void whenAddRole() {
-        RoleStore<Role> rs = new RoleStore();
+        RoleStore rs = new RoleStore();
         Role role0 = new Role("Role1");
         rs.list.add(role0);
         rs.list.add(new Role("Role2"));
@@ -20,7 +20,7 @@ public class RoleStoreTest {
 
     @Test
     public void whenReplace() {
-        RoleStore<Role> rs = new RoleStore();
+        RoleStore rs = new RoleStore();
         Role role0 = new Role("Role1");
         Role roleReplace = new Role("RoleReplace");
         rs.list.add(role0);
@@ -34,7 +34,7 @@ public class RoleStoreTest {
 
     @Test
     public void whenDelete() {
-        RoleStore<Role> rs = new RoleStore();
+        RoleStore rs = new RoleStore();
         Role role0 = new Role("Role0");
         Role role1 = new Role("Role1");
         rs.list.add(role0);
@@ -47,14 +47,14 @@ public class RoleStoreTest {
 
     @Test
     public void whenFindId() {
-        RoleStore<Role> rs = new RoleStore();
+        RoleStore rs = new RoleStore();
         Role role0 = new Role("Role0");
         Role role1 = new Role("Role1");
         rs.list.add(role0);
         rs.list.add(role1);
         rs.list.add(new Role("Role2"));
         rs.list.resetIndexForTest();
-        Base find = (Base)rs.findById("Role1");
+        Base find = (Base) rs.findById("Role1");
         assertThat(find, is((Base) role1));
     }
 }

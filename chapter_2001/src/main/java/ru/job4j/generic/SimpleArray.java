@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SimpleArray <T> implements Iterator{
+public class SimpleArray<T> implements Iterator {
 
     Object[] objects;
     int index = 0;
@@ -14,7 +14,7 @@ public class SimpleArray <T> implements Iterator{
         this.objects = objects;
     }
 
-    public void  resetIndexForTest(){
+    public void  resetIndexForTest() {
         index = 0;
     }
 
@@ -34,7 +34,7 @@ public class SimpleArray <T> implements Iterator{
         this.objects[index] = model;
     }
 
-    public void delete(int finder){
+    public void delete(int finder) {
         int cell = Arrays.asList(objects).indexOf(objects[finder]);
         System.arraycopy(objects, cell + 1, objects, cell, objects.length - 1 - cell);
         index = index - 1;
@@ -42,7 +42,7 @@ public class SimpleArray <T> implements Iterator{
 
     @Override
     public boolean hasNext() {
-        return  index < this.objects.length ? true: false;
+        return  index < this.objects.length ? true : false;
     }
 
     @Override

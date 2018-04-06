@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class SimpleArrayTest {
 
     @Test
-    public void whenAddInteger(){
+    public void whenAddInteger() {
         SimpleArray array = new SimpleArray(10);
         array.add(122);
         array.add(144);
@@ -17,7 +17,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenAddString(){
+    public void whenAddString() {
         SimpleArray array = new SimpleArray(10);
         array.add("ggg");
         array.add("test");
@@ -26,7 +26,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenSetInteger(){
+    public void whenSetInteger() {
         SimpleArray array = new SimpleArray(10);
         array.add(122);
         array.add(144);
@@ -36,7 +36,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenSetString(){
+    public void whenSetString() {
         SimpleArray array = new SimpleArray(10);
         array.add("ggg");
         array.add("test");
@@ -46,7 +46,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenDeleteString(){
+    public void whenDeleteString() {
         SimpleArray array = new SimpleArray(10);
         array.add("ggg");
         array.add("test");
@@ -56,7 +56,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenHasNext(){
+    public void whenHasNext() {
         SimpleArray array = new SimpleArray(10);
         array.add("ggg");
         array.add("test");
@@ -65,7 +65,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenHaventNext(){
+    public void whenHaventNext() {
         SimpleArray array = new SimpleArray(3);
         array.add("ggg");
         array.add("test");
@@ -74,7 +74,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenNext(){
+    public void whenNext() {
         String[] sp = {"1", "w", "qq"};
         SimpleArray array = new SimpleArray(sp);
         assertThat(array.next(), is(sp[0]));
