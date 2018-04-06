@@ -19,10 +19,10 @@ public class Converter {
                 boolean hN = false;
                 if (current.hasNext()) {
                     hN =  true;
-                }else {
-                    if (it.hasNext()){
+                } else {
+                    if (it.hasNext()) {
                         current = it.next();
-                        if(current.hasNext()){
+                        if (current.hasNext()) {
                             hN =  true;
                         }
                     }
@@ -32,18 +32,18 @@ public class Converter {
 
             @Override
             public Integer next() throws NoSuchElementException {
-                if (!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 Integer ob = null;
-                if(!current.hasNext()) {
+                if (!current.hasNext()) {
                     current = parent.next();
-                    while (current.hasNext()){
+                    while (current.hasNext()) {
                         ob = current.next();
                         break;
                     }
-                }else {
-                    while (current.hasNext()){
+                } else {
+                    while (current.hasNext()) {
                         ob = current.next();
                         break;
                     }
