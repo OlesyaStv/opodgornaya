@@ -5,53 +5,51 @@ import java.util.StringJoiner;
 
 public abstract class Character {
 
+    public static final Random RANDOM = new Random();
     private boolean vipStatus = false;
     private boolean alive = true;
     private double livingLevel = 100;
     private boolean illness = false;
-    public static final Random random = new Random();
 
-
-    protected int coin(){
-        return random.nextInt(2);
+    protected int coin() {
+        return RANDOM.nextInt(2);
     }
 
     public void setVipStatus(boolean vipStatus) {
         this.vipStatus = vipStatus;
     }
 
-
-    public boolean getVipStatus(){
+    public boolean getVipStatus() {
         return this.vipStatus;
     }
 
-    public void setLivingLevel(int livingLevel){
+    public void setLivingLevel(int livingLevel) {
         this.livingLevel = livingLevel;
         checkAlive();
     }
 
-    public void setIllness(boolean illness){
+    public void setIllness(boolean illness) {
         this.illness = illness;
     }
 
-    public double getLivingLevel(){
+    public double getLivingLevel() {
         return this.livingLevel;
     }
 
-    public void reduceLivingLevel(int count, Character attacking){
+    public void reduceLivingLevel(int count, Character attacking) {
         double livingLevelBefore = this.livingLevel;
         if (illness) {
             count = count / 2;
             illness = false;
         }
-        if (attacking.vipStatus){
-            this.livingLevel = this.livingLevel - count*1.5;
+        if (attacking.vipStatus) {
+            this.livingLevel = this.livingLevel - count * 1.5;
             attacking.setVipStatus(false);
         } else {
             this.livingLevel = this.livingLevel - count;
         }
 
-        StringJoiner stringJoiner= new StringJoiner("  ");
+        StringJoiner stringJoiner = new StringJoiner("  ");
         stringJoiner.add(attacking.toString());
         stringJoiner.add("attack");
         stringJoiner.add(this.toString());
@@ -63,19 +61,21 @@ public abstract class Character {
         checkAlive();
     }
 
-    private void checkAlive(){
+    private void checkAlive() {
         if (livingLevel <= 0) {
             this.alive = false;
-            StringJoiner stringJoiner= new StringJoiner("<----  ");
+            StringJoiner stringJoiner = new StringJoiner("<----  ");
             stringJoiner.add(this.toString());
             stringJoiner.add("has died!");
             System.out.println(stringJoiner.toString());
         }
     }
-    public boolean getAlive(){
+
+    public boolean getAlive() {
         return this.alive;
     }
-    public void way(Character character, Character theSameRaceCharacter){
+
+    public void way(Character character, Character theSameRaceCharacter) {
         attack(character);
     }
 

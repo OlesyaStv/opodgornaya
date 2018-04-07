@@ -12,83 +12,83 @@ public abstract class Detachment {
 
     protected List<Character> characters = new LinkedList<>();
 
-    protected static String Race;
-    protected int KolWixard = 1;
-    protected int KolArcher = 3;
-    protected int KolFighter = 4;
+    protected static String race;
+    protected int kolWixard = 1;
+    protected int kolArcher = 3;
+    protected int kolFighter = 4;
 
 
-    public int countAlivePersons(){
+    public int countAlivePersons() {
        int count = 0;
-       for(Character character: characters){
-           if (character.getAlive()){
+       for (Character character: characters) {
+           if (character.getAlive()) {
                count++;
            }
        }
        return  count;
     }
 
-    public boolean allDied(){
+    public boolean allDied() {
         boolean allDied = false;
-        if(countAlivePersons() == 0) {
+        if (countAlivePersons() == 0) {
             allDied = true;
-        };
+        }
         return allDied;
     }
 
     public static String getRace() {
-        return Race;
+        return race;
     }
 
-    public List<Character> getVipPersons(){
+    public List<Character> getVipPersons() {
         List<Character> vipCharacters = new LinkedList<>();
         ListIterator<Character> listite = characters.listIterator();
-        while (listite.hasNext()){
+        while (listite.hasNext()) {
             Character nextPerson = listite.next();
-            if (nextPerson.getAlive() && nextPerson.getVipStatus()){
+            if (nextPerson.getAlive() && nextPerson.getVipStatus()) {
                 vipCharacters.add(nextPerson);
             }
         }
         return vipCharacters;
     }
 
-    public List<Character> getAlivePersons(){
+    public List<Character> getAlivePersons() {
         List<Character> aliveCharacters = new LinkedList<>();
         ListIterator<Character> listite = characters.listIterator();
-        while (listite.hasNext()){
+        while (listite.hasNext()) {
             Character nextPerson = listite.next();
-            if (nextPerson.getAlive() ){
+            if (nextPerson.getAlive()) {
                 aliveCharacters.add(nextPerson);
             }
         }
         return aliveCharacters;
     }
 
-    public Character getAnotherAlivePerson(Character character){
+    public Character getAnotherAlivePerson(Character character) {
         Character anotherAlivePerson = null;
         List<Character> aliveCharacters = getAlivePersons();
         ListIterator<Character> listite = characters.listIterator();
-        while (listite.hasNext()){
+        while (listite.hasNext()) {
             Character nextPerson = listite.next();
-            if (!nextPerson.equals(character)){
+            if (!nextPerson.equals(character)) {
                 anotherAlivePerson = nextPerson;
             }
         }
         return anotherAlivePerson;
     }
 
-    public Character getRandomPerson(){
+    public Character getRandomPerson() {
         return getAlivePersons().get((int) (Math.random() * (getAlivePersons().size() - 1)));
     }
 
-    public Character getAttackPerson(){
+    public Character getAttackPerson() {
         List<Character> listForChoice = new LinkedList<>();
         List<Character> vipCharacters = getVipPersons();
-        if (vipCharacters.size() > 0){
+        if (vipCharacters.size() > 0) {
             listForChoice = vipCharacters;
         } else {
             List<Character> aliveCharacters = getAlivePersons();
-            if (aliveCharacters.size() > 0){
+            if (aliveCharacters.size() > 0) {
                 listForChoice =  aliveCharacters;
             }
         }

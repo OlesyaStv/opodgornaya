@@ -8,16 +8,17 @@ import java.util.StringJoiner;
 
 public class ElfFighter extends Character implements Elf, Fighter {
 
-    public void attack(Character character){
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner("/");
+        stringJoiner.add(this.HERO);
+        stringJoiner.add(this.RACA);
+        return stringJoiner.toString();
+    }
+
+    public void attack(Character character) {
         this.reduceLivingLevel(15, character);
     }
 
-    @Override
-    public String toString() {
-        StringJoiner stringJoiner= new StringJoiner("/");
-        stringJoiner.add(this.Hero);
-        stringJoiner.add(this.Raca);
-        return stringJoiner.toString();
-    }
 
 }

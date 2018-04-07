@@ -17,19 +17,19 @@ public class ElfArcher extends Character implements Elf, Archer {
 
     }
 
-    public void attack(Character character){
+    public void attack(Character character) {
         this.reduceLivingLevel(3, character);
     }
 
-    public void archery(Character character){
+    public void archery(Character character) {
         character.reduceLivingLevel(7, character);
     }
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner= new StringJoiner("/");
-        stringJoiner.add(this.Hero);
-        stringJoiner.add(this.Raca);
+        StringJoiner stringJoiner = new StringJoiner("/");
+        stringJoiner.add(this.HERO);
+        stringJoiner.add(this.RACA);
         return stringJoiner.toString();
     }
 }
