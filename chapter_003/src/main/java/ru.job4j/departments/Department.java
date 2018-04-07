@@ -4,7 +4,7 @@ public class Department {
 
     private String code;
 
-    public Department(String code){
+    public Department(String code) {
         this.code = code;
     }
 
@@ -23,8 +23,8 @@ public class Department {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Department Department = (Department) o;
-        return this.code.equals(Department.code);
+        Department department = (Department) o;
+        return this.code.equals(department.code);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Department {
     }
 
     public String[]  separate() {
-        String[] subStr = code.split("\\\\" );
+        String[] subStr = code.split("\\\\");
         return subStr;
     }
 

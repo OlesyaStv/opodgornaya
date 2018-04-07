@@ -1,4 +1,4 @@
-package ru.job4j.evenIterator;
+package ru.job4j.eveniterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -8,7 +8,7 @@ public class EvenIterator implements Iterator {
     private int[] values;
     private int cell = 0;
 
-    public EvenIterator(int[] values){
+    public EvenIterator(int[] values) {
         this.values = values;
     }
 
@@ -16,7 +16,7 @@ public class EvenIterator implements Iterator {
     public boolean hasNext() {
         boolean hasN = false;
         for (int ind = cell; ind  < values.length; ind++) {
-            if(this.values[ind] % 2 == 0) {
+            if (this.values[ind] % 2 == 0) {
                 hasN = true;
                 break;
             }
@@ -31,7 +31,7 @@ public class EvenIterator implements Iterator {
         }
         Integer nextEl = null;
         for (int ind = cell; ind  < values.length; ind++) {
-            if(this.values[ind] % 2 == 0) {
+            if (this.values[ind] % 2 == 0) {
                 cell = ind + 1;
                 nextEl =  this.values[ind];
             }

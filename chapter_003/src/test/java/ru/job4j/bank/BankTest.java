@@ -18,7 +18,7 @@ public class BankTest {
         User user2 = new User("Petrov", "ll789777");
         bank.addUser(user1);
         bank.addUser(user2);
-        Map base= bank.getBase();
+        Map base = bank.getBase();
         assertThat(base.containsKey(user1), is(true));
     }
 
@@ -30,7 +30,7 @@ public class BankTest {
         bank.addUser(user1);
         bank.addUser(user2);
         bank.delete(user1);
-        Map base= bank.getBase();
+        Map base = bank.getBase();
         assertThat(base.containsKey(user1), is(false));
     }
 
@@ -52,8 +52,8 @@ public class BankTest {
         bank.addUser(user1);
         Account account1User1 = new Account(8900.50, "qq7777");
         Account account2User1 = new Account(10000.00, "qqppp22");
-        bank.addAccountToUser("123456ss",account1User1);
-        bank.addAccountToUser("123456ss",account2User1);
+        bank.addAccountToUser("123456ss", account1User1);
+        bank.addAccountToUser("123456ss", account2User1);
         assertThat(bank.getUserAccounts("123456ss").get(1), is(account2User1));
     }
 
@@ -64,8 +64,8 @@ public class BankTest {
         bank.addUser(user1);
         Account account1User1 = new Account(8900.50, "qq7777");
         Account account2User1 = new Account(10000.00, "qqppp22");
-        bank.addAccountToUser("123456ss",account1User1);
-        bank.addAccountToUser("123456ss",account2User1);
+        bank.addAccountToUser("123456ss", account1User1);
+        bank.addAccountToUser("123456ss", account2User1);
         bank.deleteAccountFromUser("123456ss", account1User1);
         assertThat(bank.getUserAccounts("123456ss").get(0), is(account2User1));
     }
@@ -78,10 +78,10 @@ public class BankTest {
         bank.addUser(user1);
         bank.addUser(user2);
         Account account1User1 = new Account(1000.00, "req1");
-        bank.addAccountToUser("pass1",account1User1);
+        bank.addAccountToUser("pass1", account1User1);
         Account account1User2 = new Account(00.00, "req2");
-        bank.addAccountToUser("pass2",account1User2);
-        bank.transferMoney("pass1", "req1", "pass2", "req2", 500 );
+        bank.addAccountToUser("pass2", account1User2);
+        bank.transferMoney("pass1", "req1", "pass2", "req2", 500);
         assertThat(bank.getUserAccounts("pass1").get(0).getValue(), is(500.00));
     }
 

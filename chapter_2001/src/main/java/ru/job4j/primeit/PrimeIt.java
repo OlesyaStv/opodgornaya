@@ -1,14 +1,14 @@
-package ru.job4j.primeIt;
+package ru.job4j.primeit;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class PrimeIt implements Iterator{
+public class PrimeIt implements Iterator {
 
     private int[] values;
     private int index = 0;
 
-    public PrimeIt(int[] values){
+    public PrimeIt(int[] values) {
         this.values = values;
     }
 
@@ -28,7 +28,7 @@ public class PrimeIt implements Iterator{
     public boolean hasNext() {
         boolean hasN = false;
         for (int ind = index; ind  < values.length; ind++) {
-            if(isPrime(this.values[ind])) {
+            if (isPrime(this.values[ind])) {
                 hasN = true;
                 break;
             }
@@ -38,12 +38,12 @@ public class PrimeIt implements Iterator{
 
     @Override
     public Object next() throws NoSuchElementException {
-        if (!hasNext()){
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         Integer ob = null;
         for (int ind = index; ind  < values.length; ind++) {
-            if(isPrime(this.values[ind])) {
+            if (isPrime(this.values[ind])) {
                 ob = this.values[ind];
                 index = ind + 1;
                 break;

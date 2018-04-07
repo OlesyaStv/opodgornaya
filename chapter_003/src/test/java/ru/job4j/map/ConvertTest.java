@@ -15,7 +15,7 @@ public class ConvertTest {
         UserConvert us = new UserConvert();
         List<User> listOfUsers = new ArrayList<>();
         User checkUser = new User(3, "Sidorov", "Permian");
-        listOfUsers.add(new User(1 , "Ivanov", "St. Petersburg"));
+        listOfUsers.add(new User(1, "Ivanov", "St. Petersburg"));
         listOfUsers.add(new User(2, "Petrov", "Moscow"));
         listOfUsers.add(checkUser);
         listOfUsers.add(new User(4, "Fedorov", "Tula"));

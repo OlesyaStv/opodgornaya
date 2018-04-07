@@ -14,7 +14,7 @@ public class Departments {
             String[] depParts = department.separate();
             String poisk = "";
             for (int ind = 0; ind < depParts.length; ind++) {
-                if(ind == 0){
+                if (ind == 0) {
                     poisk = poisk.concat(depParts[0]);
                 } else {
                     poisk = poisk.concat("\\").concat(depParts[ind]);
@@ -25,7 +25,7 @@ public class Departments {
             departmentList = new ArrayList<Department>(new HashSet<Department>(departmentList));
     }
 
-    public  static Set<Department> sort (Set<Department> list) {
+    public  static Set<Department> sort(Set<Department> list) {
         TreeSet<Department> sortedList = new TreeSet<>();
         sortedList.addAll(list);
         return sortedList;
@@ -35,7 +35,7 @@ public class Departments {
     public void sortAscending() {
         Comparator<Department> compar = new Comparator<Department>() {
             @Override
-            public int compare (Department o1, Department o2) {
+            public int compare(Department o1, Department o2) {
                 return o1.getKey().compareTo(o2.getKey());
             }
         };
@@ -45,12 +45,12 @@ public class Departments {
     public void sortDecreasingly() {
         Comparator<Department> compar = new Comparator<Department>() {
             @Override
-            public int compare (Department o1, Department o2) {
+            public int compare(Department o1, Department o2) {
                     int len1 = o1.getKey().length();
                     int len2 = o2.getKey().length();
                     int lim = Math.min(len1, len2);
-                    char v1[] = o1.getKey().toCharArray();
-                    char v2[] = o2.getKey().toCharArray();
+                    char[]  v1 = o1.getKey().toCharArray();
+                    char[] v2 = o2.getKey().toCharArray();
 
                     int k = 0;
                     while (k < lim) {
@@ -67,7 +67,7 @@ public class Departments {
         this.departmentList.sort(compar);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Departments  departmentList = new Departments();
         Department d1 = new Department("K1\\SK1");
         Department d2 = new Department("K1\\SK2");

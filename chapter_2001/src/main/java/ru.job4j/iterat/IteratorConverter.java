@@ -1,4 +1,4 @@
-package ru.job4j.iterator;
+package ru.job4j.iterat;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -9,7 +9,7 @@ public class IteratorConverter implements Iterator {
     private int row = 0;
     private int cell = 0;
 
-    public IteratorConverter(int[][] values){
+    public IteratorConverter(int[][] values) {
         this.values = values;
     }
 
@@ -19,16 +19,16 @@ public class IteratorConverter implements Iterator {
     }
 
     @Override
-    public Object next() throws NoSuchElementException{
+    public Object next() throws NoSuchElementException {
         int result;
-        if (hasNext()){
-            if (values[row].length > cell){
+        if (hasNext()) {
+            if (values[row].length > cell) {
                 result = values[row][cell++];
-                if (values[row].length == cell){
+                if (values[row].length == cell) {
                     row++;
                     cell = 0;
                 }
-            }else {
+            } else {
                 result = values[row][cell++];
             }
         } else {

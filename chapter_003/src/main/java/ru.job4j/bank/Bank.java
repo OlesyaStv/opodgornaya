@@ -18,7 +18,7 @@ public class Bank {
         this.base.remove(user);
     }
 
-    public User findUserByPassport(String passport){
+    public User findUserByPassport(String passport) {
         User findUser = null;
         for (User user : base.keySet()) {
             String currentPassport = user.getPassport();
@@ -37,7 +37,7 @@ public class Bank {
             ListIterator<Account> iterator = accountListSrs.listIterator();
             while (iterator.hasNext()) {
                 Account currentAccount = iterator.next();
-                if (currentAccount.getRequisites().equals(requisites)){
+                if (currentAccount.getRequisites().equals(requisites)) {
                     findAccount = currentAccount;
                     break;
                 }
@@ -54,11 +54,11 @@ public class Bank {
         this.base.get(findUserByPassport(passport)).remove(account);
     }
 
-   public List<Account> getUserAccounts (String passport) {
+   public List<Account> getUserAccounts(String passport) {
        return this.base.get(findUserByPassport(passport));
    }
 
-    public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean wasTransfered = false;
         List<Account> accountListSrs = getUserAccounts(srcPassport);
         List<Account> accountListDest = getUserAccounts(destPassport);
@@ -66,7 +66,7 @@ public class Bank {
         Account accountDest = findAccountByRequisites(dstRequisite);
         Integer indexSrc = accountListSrs.indexOf(accountSrc);
         Integer indexDest = accountListDest.indexOf(accountDest);
-        if (indexSrc != -1 && indexDest != -1){
+        if (indexSrc != -1 && indexDest != -1) {
             if (accountSrc.getValue() >= amount) {
                 accountDest.setValue(accountDest.getValue() + amount);
                 accountSrc.setValue(accountSrc.getValue() - amount);

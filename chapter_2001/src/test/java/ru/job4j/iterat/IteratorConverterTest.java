@@ -1,4 +1,4 @@
-package ru.job4j.iterator;
+package ru.job4j.iterat;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class IteratorConverterTest {
 
     @Test
-    public void whenGetNext(){
+    public void whenGetNext() {
         int[][]values = {{1, 2}, {3, 4}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
@@ -18,8 +18,8 @@ public class IteratorConverterTest {
     }
 
     @Test
-    public void whenGetNextJA(){
-        int[][]values = {{1},{2, 3, 4, 5,},{6, 7}, {8, 9, 10, 11, 12, 13, 14}};
+    public void whenGetNextJA() {
+        int[][]values = {{1}, {2, 3, 4, 5}, {6, 7}, {8, 9, 10, 11, 12, 13, 14}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
         iteratorConverter.next();
@@ -34,7 +34,7 @@ public class IteratorConverterTest {
     }
 
     @Test
-    public void whenHasNextTrue(){
+    public void whenHasNextTrue() {
         int[][]values = {{1, 2}, {3, 4}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
@@ -44,7 +44,7 @@ public class IteratorConverterTest {
     }
 
     @Test
-    public void whenHasNextFalse(){
+    public void whenHasNextFalse() {
         int[][]values = {{1, 2}, {3, 4}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
@@ -55,8 +55,8 @@ public class IteratorConverterTest {
     }
 
     @Test
-    public void whenHasNextJATrue(){
-        int[][]values = {{1},{2, 3, 4, 5,},{6, 7}, {8, 9, 10, 11, 12, 13, 14}};
+    public void whenHasNextJATrue() {
+        int[][]values = {{1}, {2, 3, 4, 5}, {6, 7}, {8, 9, 10, 11, 12, 13, 14}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
         iteratorConverter.next();
@@ -71,8 +71,8 @@ public class IteratorConverterTest {
     }
 
     @Test
-    public void whenHasNextJAFalse(){
-        int[][]values = {{1},{2, 3, 4, 5,},{6, 7}, {8, 9, 10, 11, 12, 13, 14}};
+    public void whenHasNextJAFalse() {
+        int[][]values = {{1}, {2, 3, 4, 5}, {6, 7}, {8, 9, 10, 11, 12, 13, 14}};
         IteratorConverter iteratorConverter = new IteratorConverter(values);
         iteratorConverter.next();
         iteratorConverter.next();

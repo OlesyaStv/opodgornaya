@@ -16,7 +16,7 @@ public class Account {
     }
 
 
-    public String getReqs () {
+    public String getReqs() {
         return this.reqs;
     }
 
