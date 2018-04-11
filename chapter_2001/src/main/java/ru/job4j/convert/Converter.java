@@ -12,24 +12,21 @@ public class Converter {
         this.current = it.next();
         this.parent = it;
         return new Iterator<Integer>() {
-
             @Override
             public boolean hasNext() {
-               // return current.hasNext() || parent.hasNext();
-                boolean hN = false;
+                boolean hasNext = false;
                 if (current.hasNext()) {
-                    hN =  true;
+                    hasNext =  true;
                 } else {
                     if (it.hasNext()) {
                         current = it.next();
                         if (current.hasNext()) {
-                            hN =  true;
+                            hasNext =  true;
                         }
                     }
                 }
-                return hN;
+                return hasNext;
             }
-
             @Override
             public Integer next() throws NoSuchElementException {
                 if (!hasNext()) {
