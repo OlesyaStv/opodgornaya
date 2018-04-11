@@ -36,32 +36,26 @@ public class LinkList<E> implements Iterable {
                 currentElement = currentElement.getNextElement();
             }
         } while (currentElement != null);
-
         return element;
     }
 
     @Override
     public Iterator iterator() {
-
         int expectedModCount = modCount;
-
         return new Iterator<E>() {
-
             @Override
             public boolean hasNext() throws ConcurrentModificationException {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                boolean hN = false;
+                boolean hasNext = false;
                 if (nodeNext != null && nodeNext.getIndex() == 0) {
-                    hN =  true;
+                    hasNext =  true;
                 } else {
-                    hN =  nodeNext.hasNextElement();
+                    hasNext =  nodeNext.hasNextElement();
                 }
-                return hN;
-
+                return hasNext;
             }
-
             @Override
             public E next() throws ConcurrentModificationException {
                 if (expectedModCount != modCount) {
