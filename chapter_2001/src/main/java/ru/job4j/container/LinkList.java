@@ -40,6 +40,35 @@ public class LinkList<E> implements Iterable {
         return element;
     }
 
+    public void setIndexes() {
+        int indexH = 0;
+        Node<E> currentElement = firstAddElement;
+        do {
+            currentElement.setIndex(indexH++);
+            currentElement = currentElement.getNextElement();
+        } while (currentElement != null);
+    }
+
+    public void remove(int index) {
+        modCount++;
+        Node<E> previousElement = null;
+        Node<E> currentElement = firstAddElement;
+        do {
+            if (currentElement.getIndex() == index) {
+                if (previousElement == null) {
+                    firstAddElement = currentElement.getNextElement();
+                    previousElement = firstAddElement;
+                } else {
+                    previousElement.setNextElement(currentElement.getNextElement());
+                }
+            } else {
+                previousElement = currentElement;
+            }
+            currentElement = currentElement.getNextElement();
+        } while (currentElement != null);
+        setIndexes();
+    }
+
 
     @Override
     public Iterator iterator() {

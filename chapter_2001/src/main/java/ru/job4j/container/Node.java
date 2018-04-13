@@ -18,6 +18,10 @@ public class Node<E>  {
         return this.index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public boolean hasNextElement() {
         return this.nextElement != null;
     }
