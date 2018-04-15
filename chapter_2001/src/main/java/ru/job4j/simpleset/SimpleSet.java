@@ -2,7 +2,7 @@ package ru.job4j.simpleset;
 
 import java.util.Iterator;
 
-public class SimpleSet<E>  implements Iterable {
+public class SimpleSet<E>  implements Iterable<E> {
 
     private E[] list;
     private int index = 0;
