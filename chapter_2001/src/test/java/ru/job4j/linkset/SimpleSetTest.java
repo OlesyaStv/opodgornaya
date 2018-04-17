@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class SimpleSetTest {
 
-    private SimpleSet<Integer> set = new SimpleSet<>();
+    private SimpleSetNew<Integer> set = new SimpleSetNew<>();
 
     @Test
     public void whenAddAndGet() {
