@@ -18,22 +18,18 @@ public class War {
         return RANDOM.nextInt(2);
     }
 
-
     public void fight() {
         do {
-            Detachment first;
-            Detachment second;
             if (coin() == 1) {
-                first = oneSide;
-                second = secondSide;
+                Character attackPersonFirst = oneSide.getAttackPerson();
+                Character personForFight = secondSide.getRandomPerson();
+                attackPersonFirst.way(personForFight, oneSide.getAnotherAlivePerson(attackPersonFirst));
             } else {
-                first = secondSide;
-                second = oneSide;
+                Character attackPersonFirst = secondSide.getAttackPerson();
+                Character personForFight = oneSide.getRandomPerson();
+                attackPersonFirst.way(personForFight, secondSide.getAnotherAlivePerson(attackPersonFirst));
             }
-            Character attackPersonFirst = first.getAttackPerson();
-            Character personForFight = second.getRandomPerson();
-            attackPersonFirst.way(personForFight, first.getAnotherAlivePerson(attackPersonFirst));
-        } while ((oneSide.countAlivePersons() > 0 &&  secondSide.countAlivePersons() > 0));
+        } while ((oneSide.countAlivePersons() > 0 && secondSide.countAlivePersons() > 0));
 
         if (oneSide.allDied()) {
             winner = secondSide;
@@ -65,7 +61,4 @@ public class War {
     public static void main(String[] args) {
         War war1 = new War();
     }
-
-
-
 }

@@ -36,6 +36,18 @@ public abstract class Character {
         return this.livingLevel;
     }
 
+    public void infoText(double livingLevelBefore, int count, Character attacking) {
+        StringJoiner stringJoiner = new StringJoiner("  ");
+        stringJoiner.add(attacking.toString());
+        stringJoiner.add("attack");
+        stringJoiner.add(this.toString());
+        stringJoiner.add("with livingLevel = ");
+        stringJoiner.add(Double.toString(livingLevelBefore));
+        stringJoiner.add("count ");
+        stringJoiner.add(Integer.toString(count));
+        System.out.println(stringJoiner.toString());
+    }
+
     public void reduceLivingLevel(int count, Character attacking) {
         double livingLevelBefore = this.livingLevel;
         if (illness) {
@@ -48,16 +60,7 @@ public abstract class Character {
         } else {
             this.livingLevel = this.livingLevel - count;
         }
-
-        StringJoiner stringJoiner = new StringJoiner("  ");
-        stringJoiner.add(attacking.toString());
-        stringJoiner.add("attack");
-        stringJoiner.add(this.toString());
-        stringJoiner.add("with livingLevel = ");
-        stringJoiner.add(Double.toString(livingLevelBefore));
-        stringJoiner.add("count ");
-        stringJoiner.add(Integer.toString(count));
-        System.out.println(stringJoiner.toString());
+        infoText(livingLevelBefore, count, attacking);
         checkAlive();
     }
 
