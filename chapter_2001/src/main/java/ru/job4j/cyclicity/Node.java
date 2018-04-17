@@ -29,12 +29,11 @@ public class Node<T>  {
         boolean hasCycle = false;
         Node<T> turtle = first;
         Node<T> hare = first;
-        while (hare.next != null && hare.next.next != null) {
+        while (!hasCycle && hare.next != null && hare.next.next != null) {
             turtle = turtle.next;
             hare = hare.next.next;
             if (turtle == hare) {
                 hasCycle = true;
-                break;
             }
         }
         return hasCycle;
