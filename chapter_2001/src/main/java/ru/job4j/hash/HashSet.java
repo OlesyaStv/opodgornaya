@@ -6,41 +6,38 @@ public class HashSet<E> {
 
     private int countCell;
     private Object[] objects;
-    private Integer indexForHash;
-    private Integer indexForTable;
 
-    public int returnHash() {
-        int hashCode = indexForHash.hashCode();
-        this.indexForHash++;
-        return hashCode;
+    public int returnHash(E e) {
+        return e.hashCode();
     }
 
     public boolean contains(E e) {
         boolean containObject = false;
-        for (int start = 0; start < objects.length; start++) {
-            Para para = (Para) objects[start];
-            if (para != null && !containObject && !para.getEmpty() && para.getValue().equals(e)) {
+        int hashCode = returnHash(e);
+        if (hashCode < objects.length) {
+            PairEntry pairEntry = (PairEntry) objects[hashCode];
+            if (pairEntry != null  && !pairEntry.getEmpty()) {
                 containObject = true;
             }
         }
         return  containObject;
     }
 
-    private void addFreeCells() {
-        Object[] newObjects = new Object[countCell * 2];
-        arraycopy(objects, 0, newObjects, 0, countCell);
-        this.objects = newObjects;
-        this.countCell = countCell * 2;
+    private void addFreeCells(int hashCode) {
+        while (hashCode > this.countCell) {
+            Object[] newObjects = new Object[countCell * 2];
+            arraycopy(objects, 0, newObjects, 0, countCell);
+            this.objects = newObjects;
+            this.countCell = countCell * 2;
+        }
     }
 
     public boolean remove(E e) {
         boolean wasRemoved = false;
-        for (int start = 0; start < objects.length; start++) {
-            Para para = (Para) objects[start];
-            if (!wasRemoved && !para.getEmpty() && para.getValue().equals(e)) {
-                para.setEmpty();
-                wasRemoved = true;
-            }
+        if (contains(e)) {
+            PairEntry pairEntry = (PairEntry) objects[returnHash(e)];
+            pairEntry.setEmpty();
+            wasRemoved = true;
         }
         return wasRemoved;
     }
@@ -48,12 +45,10 @@ public class HashSet<E> {
     public boolean add(E e) {
         boolean wasAdded = false;
         if (!contains(e)) {
-            int h = (int) returnHash();
-            Para para = new Para(h, e);
-            if (indexForTable > this.countCell) {
-                addFreeCells();
-            }
-            objects[indexForTable++] = para;
+            int hashCode = returnHash(e);
+            PairEntry pairEntry = new PairEntry(hashCode, e);
+            addFreeCells(hashCode);
+            objects[hashCode] = pairEntry;
             wasAdded = true;
         }
         return wasAdded;
@@ -62,7 +57,5 @@ public class HashSet<E> {
     public HashSet(int countCell) {
         this.objects = new Object[countCell];
         this.countCell = countCell;
-        this.indexForHash = 0;
-        this.indexForTable = 0;
     }
 }

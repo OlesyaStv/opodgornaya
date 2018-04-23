@@ -1,6 +1,6 @@
 package ru.job4j.hash;
 
-public class Para<E> {
+public class PairEntry<E> {
     private int key;
     private E value;
     private boolean empty;
@@ -17,11 +17,7 @@ public class Para<E> {
         return value;
     }
 
-    public int getKey() {
-        return key;
-    }
-
-    public Para(int key, E value) {
+    public PairEntry(int key, E value) {
         this.key = key;
         this.value = value;
         this.empty = false;
