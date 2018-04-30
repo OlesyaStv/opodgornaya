@@ -4,15 +4,12 @@ public class Request {
 
     private Integer id;
     private Integer book;
-    public enum Type { ADD, DELETE };
-    public enum Action { BID, ASK };
-    private Type type;
-    private Action action;
+    private String type;
+    private String action;
     private double price;
     private Integer volume;
-    private boolean exist;
 
-    public Action getAction() {
+    public String getAction() {
         return action;
     }
 
@@ -48,26 +45,17 @@ public class Request {
         return this.book.hashCode();
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setNotExist() {
-        this.exist = false;
-    }
-
-    public boolean getExist() {
-        return  this.exist;
-    }
-
-    public Request(int id, Integer book, Type type, Action action, double price, int volume) {
+    public Request(int id, Integer book, String type, String action, double price, int volume) {
         this.id = id;
         this.book = book;
         this.type = type;
         this.action = action;
         this.price = price;
         this.volume = volume;
-        this.exist = true;
     }
 
 }

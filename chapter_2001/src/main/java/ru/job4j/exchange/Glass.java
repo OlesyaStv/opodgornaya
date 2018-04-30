@@ -3,22 +3,82 @@ package ru.job4j.exchange;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
+import java.lang.System;
+import java.util.StringJoiner;
 
 public class Glass {
 
     private static Integer book;
     private LinkedList<Request> bidLinkedList;
     private LinkedList<Request> askLinkedList;
+    private LinkedList<PrintLine> printList;
+
+    public Integer getPrintListSize() {
+        return printList.size();
+    }
 
     public LinkedList<Request> whatList(Request request) {
         LinkedList<Request> list = null;
-        if (request.getAction() == Request.Action.BID) {
+        if (request.getAction() == "BID") {
             list = bidLinkedList;
-        } else if (request.getAction() ==  Request.Action.ASK) {
+        } else if (request.getAction() ==  "ASK") {
             list = askLinkedList;
         }
         return list;
+    }
+
+    private Integer countVolume(LinkedList<Request> list, Double price) {
+        Integer volume = 0;
+        for (int bidCell = 0; bidCell < list.size(); bidCell++) {
+            Request bidRequest = list.get(bidCell);
+            if (bidRequest.getPrice().equals(price)) {
+                volume += bidRequest.getVolume();
+            }
+        }
+        return volume;
+    }
+
+    private LinkedList<Double> createPriceList() {
+        LinkedList<Double> priceList = new LinkedList<>();
+        for (int bidCell = 0; bidCell < bidLinkedList.size(); bidCell++) {
+            Request bidRequest = bidLinkedList.get(bidCell);
+            if (!priceList.contains(bidRequest.getPrice())) {
+                priceList.add(bidRequest.getPrice());
+            }
+        }
+        for (int askCell = 0; askCell < askLinkedList.size(); askCell++) {
+            Request askRequest = askLinkedList.get(askCell);
+            if (!priceList.contains(askRequest.getPrice())) {
+                priceList.add(askRequest.getPrice());
+            }
+        }
+        priceList.sort(new Comparator<Double>() {
+            @Override
+            public int compare(Double o1, Double o2) {
+                return  -o1.compareTo(o2);
+            }
+        });
+        return priceList;
+    }
+
+    public void print() {
+        LinkedList<Double> priceList = createPriceList();
+        Iterator priceListIterator = priceList.listIterator();
+        while (priceListIterator.hasNext()) {
+            Double price = (Double) priceListIterator.next();
+            Integer volumeBid = countVolume(bidLinkedList, price);
+            Integer volumeAsk = countVolume(askLinkedList, price);
+            printList.add(new PrintLine(price, volumeBid, volumeAsk));
+        }
+        System.out.println("Bid  Price  Ask");
+        for (int printCell = 0; printCell < printList.size(); printCell++) {
+            PrintLine printLine = printList.get(printCell);
+            StringJoiner stringJoiner = new StringJoiner("  ");
+            stringJoiner.add(printLine.getVolumeBid().toString());
+            stringJoiner.add(String.format("%.2f", printLine.getPrice()));
+            stringJoiner.add(printLine.getVolumeAsk().toString());
+            System.out.println(stringJoiner.toString());
+        }
     }
 
     public void sort() {
@@ -55,9 +115,9 @@ public class Glass {
     public boolean processed(Request request) {
         boolean processed = false;
         if (request != null) {
-            if (request.getType() == Request.Type.ADD) {
+            if (request.getType() == "ADD") {
                 processed = add(request);
-            } else if (request.getType() == Request.Type.DELETE) {
+            } else if (request.getType() == "DELETE") {
                 processed = delete(request);
             }
         }
@@ -69,48 +129,29 @@ public class Glass {
             Iterator askIterator = askLinkedList.iterator();
             while (askIterator.hasNext()) {
                 Request askRequest = (Request) askIterator.next();
-                if (askRequest.getExist()) {
-                    Iterator bidIterator = bidLinkedList.iterator();
-                    boolean wasCombine = false;
-                    while (bidIterator.hasNext() && !wasCombine) {
-                        Request bidRequest = (Request) bidIterator.next();
-                        if (bidRequest.getExist()) {
-                            if (askRequest.getPrice() <= bidRequest.getPrice()) {
-                                wasCombine = true;
-                                Integer difference = askRequest.getVolume() - bidRequest.getVolume();
-                                if (difference == 0) {
-                                    bidRequest.setNotExist();
-                                    askRequest.setNotExist();
-                                } else if (difference > 0) {
-                                    askRequest.setVolume(difference);
-                                    bidRequest.setNotExist();
-                                } else if (difference < 0) {
-                                    bidRequest.setVolume(-difference);
-                                    askRequest.setNotExist();
-                                }
-                            }
+                Iterator bidIterator = bidLinkedList.iterator();
+                boolean wasCombine = false;
+                while (bidIterator.hasNext() && !wasCombine) {
+                    Request bidRequest = (Request) bidIterator.next();
+                    if (askRequest.getPrice() <= bidRequest.getPrice()) {
+                        wasCombine = true;
+                        Integer volume = askRequest.getVolume() - bidRequest.getVolume();
+                        if (volume == 0) {
+                            bidLinkedList.remove(bidRequest);
+                            askLinkedList.remove(askRequest);
+                        } else if (volume > 0) {
+                            askRequest.setVolume(volume);
+                            bidLinkedList.remove(bidRequest);
+                        } else if (volume < 0) {
+                            bidRequest.setVolume(-volume);
+                            askLinkedList.remove(askRequest);
                         }
                     }
                 }
             }
-            removeNotExists();
         }
     }
 
-    public void removeNotExists() {
-        for (int i = 0; i < askLinkedList.size(); i++) {
-            Request element = askLinkedList.get(i);
-            if (!element.getExist()) {
-                askLinkedList.remove(i);
-            }
-        }
-        for (int i = 0; i < bidLinkedList.size(); i++) {
-            Request element = bidLinkedList.get(i);
-            if (!element.getExist()) {
-                bidLinkedList.remove(i);
-            }
-        }
-    }
 
     public LinkedList<Request> getBidLinkedList() {
         return this.bidLinkedList;
@@ -120,6 +161,7 @@ public class Glass {
         this.book = book;
         this.bidLinkedList = new LinkedList<>();
         this.askLinkedList = new LinkedList<>();
+        this.printList = new LinkedList<>();
     }
 
 

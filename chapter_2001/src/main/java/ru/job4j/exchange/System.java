@@ -27,6 +27,12 @@ public class System {
         }
     }
 
+    public void print() {
+        for (Glass glass : glasses.values()) {
+            glass.print();
+        }
+    }
+
     public Glass getGlass(Integer hashCode) {
         return glasses.get(hashCode);
     }
