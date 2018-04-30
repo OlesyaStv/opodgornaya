@@ -15,16 +15,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree {
     @Override
     public boolean add(Comparable parent, Comparable child) {
         boolean wasAdded = false;
-        boolean elementExists = false;
-        Optional<Node> elementFind = findBy(parent);
-        Node<E> parentFind = (Node<E>) elementFind.get();
-        for (Node<E> element: parentFind.leaves()) {
-            if (element.eqValue((E) child)) {
-                elementExists = true;
-                break;
-            }
-        }
-        if (parentFind != null && !elementExists) {
+        Optional<Node> elementFindParent = findBy(parent);
+        Optional<Node> elementFindChild = findBy(child);
+        if (elementFindParent.isPresent() && !elementFindChild.isPresent()) {
+            Node<E> parentFind = (Node<E>) elementFindParent.get();
             parentFind.add(new Node(child));
             wasAdded = true;
             size++;
@@ -70,8 +64,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree {
 
     @Override
     public Iterator<E> iterator() {
+        lastTakenElement = root;
         return new Iterator<E>() {
-
             @Override
             public boolean hasNext() {
                 return wasTaken < size;
@@ -79,26 +73,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree {
 
             @Override
             public E next() {
-                if (lastTakenElement == null) {
-                    lastTakenElement = root;
-                } else {
-                    Optional<Node<E>> rsl = Optional.empty();
-                    Queue<Node<E>> data = new LinkedList<>();
-                    data.offer(root);
-                    boolean findNextElement = false;
-                    while (!data.isEmpty()) {
-                        Node<E> el = data.poll();
-                        if (findNextElement) {
-                            rsl = Optional.of(el);
-                            lastTakenElement = rsl.get();
-                            break;
-                        }
-                        if (el.eqValue(((E) lastTakenElement.getValue()))) {
-                            findNextElement = true;
-                        }
-                        for (Node<E> child : el.leaves()) {
-                            data.offer(child);
-                        }
+                Optional<Node<E>> rsl = Optional.empty();
+                Queue<Node<E>> data = new LinkedList<>();
+                data.offer(root);
+                boolean findNextElement = false;
+                while (!data.isEmpty()) {
+                    Node<E> el = data.poll();
+                    if (findNextElement) {
+                        rsl = Optional.of(el);
+                        lastTakenElement = rsl.get();
+                        break;
+                    }
+                    if (el.eqValue(((E) lastTakenElement.getValue()))) {
+                        findNextElement = true;
+                    }
+                    for (Node<E> child : el.leaves()) {
+                        data.offer(child);
                     }
                 }
                 return lastTakenElement.getValue();
