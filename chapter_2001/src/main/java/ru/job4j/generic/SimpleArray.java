@@ -2,8 +2,6 @@ package ru.job4j.generic;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 public class SimpleArray<T> implements Iterator {
 
@@ -14,13 +12,23 @@ public class SimpleArray<T> implements Iterator {
         this.objects = objects;
     }
 
+    public SimpleArray(int size) {
+        this.objects = new Object[size];
+    }
+
+    public int size() {
+        return index;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
     public void  resetIndexForTest() {
         index = 0;
     }
 
-    public SimpleArray(int size) {
-        this.objects = new Object[size];
-    }
+
 
     public void add(T model) {
         this.objects[index++] = model;

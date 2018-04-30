@@ -11,6 +11,10 @@ public class HashSet<E> {
         return e.hashCode();
     }
 
+    public int size() {
+        return this.objects.length;
+    }
+
     public boolean contains(E e) {
         boolean containObject = false;
         int hashCode = returnHash(e);
@@ -52,6 +56,19 @@ public class HashSet<E> {
             wasAdded = true;
         }
         return wasAdded;
+    }
+
+    public E get(E e) {
+        E result = null;
+        PairEntry pairEntry = null;
+        int hashCode = returnHash(e);
+        if (hashCode < objects.length) {
+            pairEntry = (PairEntry) objects[hashCode];
+            if (pairEntry != null  && !pairEntry.getEmpty()) {
+                result = (E) pairEntry.getValue();
+            }
+        }
+        return  result;
     }
 
     public HashSet(int countCell) {

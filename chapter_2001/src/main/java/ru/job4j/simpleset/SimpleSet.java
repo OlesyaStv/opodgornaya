@@ -1,5 +1,6 @@
 package ru.job4j.simpleset;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class SimpleSet<E>  implements Iterable<E> {

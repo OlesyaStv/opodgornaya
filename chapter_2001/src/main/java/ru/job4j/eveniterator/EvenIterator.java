@@ -34,6 +34,7 @@ public class EvenIterator implements Iterator {
             if (this.values[ind] % 2 == 0) {
                 cell = ind + 1;
                 nextEl =  this.values[ind];
+                break;
             }
         }
         return nextEl;
