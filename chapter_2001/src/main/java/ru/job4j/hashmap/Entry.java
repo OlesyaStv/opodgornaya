@@ -2,13 +2,13 @@ package ru.job4j.hashmap;
 
 import java.util.Objects;
 
-public class Para<K, V>  {
+public class Entry<K, V>  {
 
     private K key;
     private V value;
     private boolean empty;
 
-    public Para(K key, V value) {
+    public Entry(K key, V value) {
         this.key = key;
         this.value = value;
         this.empty = false;
@@ -42,7 +42,7 @@ public class Para<K, V>  {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Para<?, ?> para = (Para<?, ?>) o;
+        Entry<?, ?> para = (Entry<?, ?>) o;
         return Objects.equals(key, para.key) && Objects.equals(value, para.value);
     }
 

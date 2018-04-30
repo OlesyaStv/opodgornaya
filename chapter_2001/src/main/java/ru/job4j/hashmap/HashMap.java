@@ -1,8 +1,6 @@
 package ru.job4j.hashmap;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Objects;
 
 import static java.lang.System.arraycopy;
 
@@ -27,9 +25,9 @@ public class HashMap<K, V> implements Iterable<K> {
             while (key.hashCode() >= this.countCell) {
                 addFreeCells();
             }
-            Para para = (Para) objects[key.hashCode()];
+            Entry para = (Entry) objects[key.hashCode()];
             if (para == null || para.empty()) {
-                objects[key.hashCode()] = new Para(key, value);
+                objects[key.hashCode()] = new Entry(key, value);
                 insert = true;
                 mapLength++;
             }
@@ -38,18 +36,18 @@ public class HashMap<K, V> implements Iterable<K> {
     }
 
     public V get(K key) {
-       V result = null;
-       if (key.hashCode() < this.countCell && objects[key.hashCode()] != null) {
-           Para para = (Para) objects[key.hashCode()];
-           result = (V) para.getValue();
-       }
-       return result;
+        V result = null;
+        if (key.hashCode() < this.countCell && objects[key.hashCode()] != null) {
+            Entry para = (Entry) objects[key.hashCode()];
+            result = (V) para.getValue();
+        }
+        return result;
     }
 
     public boolean delete(K key) {
         boolean delete = false;
         if (get(key) != null) {
-            Para para = (Para) objects[key.hashCode()];
+            Entry para = (Entry) objects[key.hashCode()];
             para.delete();
             delete = true;
             mapLength--;
@@ -70,7 +68,7 @@ public class HashMap<K, V> implements Iterable<K> {
                 K result = null;
                 if (indexForSearch < objects.length) {
                     for (int cell = indexForSearch; cell < objects.length; cell++) {
-                        Para para = (Para) objects[cell];
+                        Entry para = (Entry) objects[cell];
                         if (para != null) {
                             if (!para.empty()) {
                                 result =  (K) para.getKey();
