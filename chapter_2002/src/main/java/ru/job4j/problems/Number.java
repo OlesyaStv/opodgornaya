@@ -7,16 +7,8 @@ public class Number {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public void increase() {
-        this.number = this.number + 100;
-    }
-
-    public void multiplication() {
-        this.number = this.number * 2;
+        this.number = this.number + 1;
     }
 
     Number(int number) {

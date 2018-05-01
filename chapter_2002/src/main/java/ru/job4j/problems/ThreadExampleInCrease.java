@@ -13,7 +13,7 @@ public class ThreadExampleInCrease extends Thread {
 
     public void increaseNumber() {
         this.number.increase();
-        System.out.println("ThreadExampleInCrease " + this.number.getNumber());
+        System.out.println(this.number.getNumber());
     }
 
 
