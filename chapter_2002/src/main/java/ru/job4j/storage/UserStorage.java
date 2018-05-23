@@ -30,7 +30,7 @@ public class UserStorage {
         return wasAdded;
     }
 
-    public boolean update(User user) {
+    public synchronized boolean update(User user) {
         boolean wasUpdate = false;
         int index = userStorage.indexOf(user);
         if (index != -1) {
@@ -50,8 +50,7 @@ public class UserStorage {
         return wasDeleted;
     }
 
-    public void  transfer(int fromId, int toId, int amount) {
-
+    public synchronized void  transfer(int fromId, int toId, int amount) {
       User userFrom = findById(fromId);
       User userTo = findById(toId);
       if (userFrom != null && userTo != null && userFrom.getAmount() >= amount) {
@@ -64,7 +63,7 @@ public class UserStorage {
         userStorage = new LinkedList<>();
     }
 
-    public int getSize() {
+    public synchronized int getSize() {
         return userStorage.size();
     }
 }
