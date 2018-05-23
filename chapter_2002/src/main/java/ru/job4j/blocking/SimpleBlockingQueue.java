@@ -8,8 +8,8 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    @GuardedBy("this")
-    private Queue<T> queue = new LinkedList<>();
+    @GuardedBy("queue")
+    private final Queue<T> queue = new LinkedList<>();
     public static final Integer MAXLENGTH = 3;
 
     public void offer(T value) throws InterruptedException {
