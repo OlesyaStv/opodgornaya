@@ -51,12 +51,12 @@ public class UserStorage {
     }
 
     public synchronized void  transfer(int fromId, int toId, int amount) {
-      User userFrom = findById(fromId);
-      User userTo = findById(toId);
-      if (userFrom != null && userTo != null && userFrom.getAmount() >= amount) {
-          userFrom.setAmount(userFrom.getAmount() - amount);
-          userTo.setAmount(userTo.getAmount() + amount);
-      }
+        User userFrom = findById(fromId);
+        User userTo = findById(toId);
+        if (userFrom != null && userTo != null && userFrom.getAmount() >= amount) {
+            userFrom.setAmount(userFrom.getAmount() - amount);
+            userTo.setAmount(userTo.getAmount() + amount);
+        }
     }
 
     public UserStorage() {
