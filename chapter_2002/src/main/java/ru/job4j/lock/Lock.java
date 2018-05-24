@@ -29,9 +29,4 @@ public class Lock {
             notify();
         }
     }
-
-    public Lock() {
-        this.lockedThread = null;
-        this.locked = false;
-    }
 }
