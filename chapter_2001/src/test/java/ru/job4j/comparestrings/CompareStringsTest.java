@@ -9,12 +9,12 @@ public class CompareStringsTest {
     @Test
     public void whenTheSame() {
         CompareStrings compareStrings = new CompareStrings("vava", "avav");
-        assertThat(compareStrings.getIdentical(), is(true));
+        assertThat(compareStrings.identical(), is(true));
     }
 
     @Test
     public void whenDifferent() {
         CompareStrings compareStrings = new CompareStrings("vava", "avvv");
-        assertThat(compareStrings.getIdentical(), is(false));
+        assertThat(compareStrings.identical(), is(false));
     }
 }
