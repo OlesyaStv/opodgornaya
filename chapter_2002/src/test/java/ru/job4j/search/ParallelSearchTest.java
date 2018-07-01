@@ -1,11 +1,11 @@
 package ru.job4j.search;
 
-import java.util.LinkedList;
-import java.util.Queue;
+        import java.util.LinkedList;
+        import java.util.Queue;
 
 public class ParallelSearchTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         LinkedList<String> list = new LinkedList<>();
         list.add(".txt");
         ParallelSearch parallelSearch = new ParallelSearch("C:\\projects\\filesSearch", "qqqq", list);

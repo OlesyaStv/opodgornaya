@@ -29,7 +29,7 @@ public class ParallelSearch {
         this.exts = exts;
     }
 
-    public synchronized void listPaths() throws IOException {
+    public void listPaths() throws IOException {
         Path dir = Paths.get(this.root);
         if (Files.exists(dir)) {
             FileVisitor<Path> visitor = new SimpleFileVisitor<Path>() {
@@ -52,70 +52,58 @@ public class ParallelSearch {
         this.finish = true;
     }
 
-    public synchronized void textSearch() throws InterruptedException, IOException {
-        while (!this.finish) {
-            files.wait();
-        }
-        Iterator<String> iterator = paths.iterator();
-        while (iterator.hasNext()) {
-            String currentString = iterator.next();
-            File file = new File(currentString);
-            Scanner scanner = new Scanner(file);
-            try {
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    if (line.contains(this.text)) {
-                        this.files.add(currentString);
+    public void textSearch() throws InterruptedException, IOException {
+        if (this.finish) {
+            Iterator<String> iterator = paths.iterator();
+            while (iterator.hasNext()) {
+                String currentString = iterator.next();
+                File file = new File(currentString);
+                Scanner scanner = new Scanner(file);
+                try {
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        if (line.contains(this.text)) {
+                            this.files.add(currentString);
+                        }
                     }
+                } finally {
+                    scanner.close();
                 }
-            } finally {
-                scanner.close();
             }
         }
     }
-        public void init() {
-            Thread search = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        listPaths();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+    public void init() throws InterruptedException {
+
+        Thread search = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    listPaths();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            };
-            search.start();
-
-            try {
-                search.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        };
+        search.start();
 
-            Thread read = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        textSearch();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread read = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    textSearch();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            };
-            read.start();
-
-            try {
-                read.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
-
-        synchronized Queue<String>  result() {
-            return this.files;
-        }
-
-
+        };
+        read.start();
     }
+
+    synchronized Queue<String>  result() {
+        return this.files;
+    }
+
+
+}
