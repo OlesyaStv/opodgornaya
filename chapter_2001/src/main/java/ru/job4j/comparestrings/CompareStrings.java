@@ -27,7 +27,7 @@ public class CompareStrings {
 
         for (int i = 0; i < secondStringArray.length; i++) {
             Integer amount = hashMap.get(secondStringArray[i]);
-            amount = amount == null ? 0: amount - 1;
+            amount = amount == null ? 0 : amount - 1;
             if (amount < 0) {
                 identical = false;
                 break;

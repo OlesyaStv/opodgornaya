@@ -8,6 +8,8 @@ public class TreadPoolTest {
     @Test
     public void whenTest() throws InterruptedException {
         TreadPool treadPool = new TreadPool();
+        treadPool.startThreads();
         treadPool.work(new Thread());
+        treadPool.shutdown();
     }
 }

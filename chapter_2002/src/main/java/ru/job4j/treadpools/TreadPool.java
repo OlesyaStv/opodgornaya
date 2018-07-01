@@ -6,49 +6,21 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-@ThreadSafe
 public class TreadPool {
 
     private final List<Thread> threads;
-    @GuardedBy("tasks")
-    private final Queue<Runnable> tasks;
+    private final BlockingQueue<Runnable> tasks;
     private final Integer size = Runtime.getRuntime().availableProcessors();
-
-    public void work(Runnable a) throws InterruptedException {
-        synchronized (this.tasks) {
-            while (tasks.size() == size) {
-                System.out.println(String.format("%s wait", Thread.currentThread().getId()));
-                tasks.wait();
-            }
-            System.out.println(String.format("%s offer ", Thread.currentThread().getId()));
-            tasks.offer(a);
-            tasks.notifyAll();
-        }
-    }
-
-      public void shutdown() {
-
-    }
-
-    public void poll() throws InterruptedException {
-        synchronized (this.tasks) {
-            while (tasks.isEmpty()) {
-                System.out.println(String.format("%s wait", Thread.currentThread().getId()));
-                tasks.wait();
-            }
-            tasks.poll();
-            System.out.println(String.format("%s poll", Thread.currentThread().getId()));
-            if (tasks.size() < size) {
-                tasks.notifyAll();
-            }
-        }
-    }
 
     public TreadPool() {
         threads = new LinkedList<>();
         tasks = new LinkedBlockingQueue<>();
+    }
+
+    public void startThreads() {
         for (int j = 0; j < size; j++) {
             Thread thread = new Thread() {
                 @Override
@@ -65,7 +37,20 @@ public class TreadPool {
         }
     }
 
-    public Integer getSize() {
-        return this.size;
+    public void work(Runnable a) throws InterruptedException {
+        tasks.put(a);
+
+    }
+
+    public void shutdown() {
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.isAlive()) {
+                t.interrupt();
+            }
+        }
+    }
+
+    public void poll() throws InterruptedException {
+        tasks.take();
     }
 }
