@@ -11,8 +11,8 @@ public class NonBlockTest {
             @Override
             public void run() {
                 modelFirst.setModelName("change model 1 by firstThread");
-                nonBlock.update(modelFirst);
-
+                Integer version1 = modelFirst.getVersion();
+                nonBlock.update(modelFirst, version1);
             }
         };
 
@@ -20,7 +20,8 @@ public class NonBlockTest {
             @Override
             public void run() {
                 modelFirst.setModelName("change model 1 by secondThread");
-                nonBlock.update(modelFirst);
+                Integer version2 = modelFirst.getVersion();
+                nonBlock.update(modelFirst, version2);
             }
         };
         firstThread.start();

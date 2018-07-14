@@ -19,10 +19,10 @@ public class NonBlock {
         return storage.get(id);
     }
 
-    public void update(Base model) {
+    public void update(Base model, int version) {
         storage.computeIfPresent(model.getId(), (k, v) ->
         {
-            if (v.getVersion() != model.getVersion()) {
+            if (v.getVersion() != version) {
                 throw new OptimisticException("Versions differ!");
             } else {
                 return model;
